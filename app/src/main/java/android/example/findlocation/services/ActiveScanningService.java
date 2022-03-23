@@ -241,13 +241,13 @@ public class ActiveScanningService extends Service implements SensorEventListene
     private PendingIntent createPendingIntentForNotification() {
         Intent mNotificationIntent = new Intent(this, ScanningActivity.class);
         mNotificationIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        return PendingIntent.getActivity(this, 0, mNotificationIntent, 0);
+        return PendingIntent.getActivity(this, 0, mNotificationIntent, PendingIntent.FLAG_IMMUTABLE);
     }
 
     private Notification createNotification(PendingIntent mPendingIntent) {
         Intent disableIntent = new Intent(this, ActiveScanningServiceBroadcastReceiver.class);
         disableIntent.setAction(ActiveScanningServiceBroadcastReceiver.ACTION_DISABLE_SERVICE);
-        PendingIntent disablePendingIntent = PendingIntent.getBroadcast(this, 0, disableIntent, 0);
+        PendingIntent disablePendingIntent = PendingIntent.getBroadcast(this, 0, disableIntent, PendingIntent.FLAG_IMMUTABLE);
 
         mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle(getText(R.string.notification_title))
